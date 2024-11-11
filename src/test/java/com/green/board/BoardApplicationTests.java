@@ -9,5 +9,5 @@ class BoardApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
+// 에러터지면 에러메세지 유심히 보자.
 }
