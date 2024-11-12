@@ -1,8 +1,6 @@
 package com.green.board;
 
-import com.green.board.model.BoardInsReq;
-import com.green.board.model.BoardSelOneRes;
-import com.green.board.model.BoardSelRes;
+import com.green.board.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,24 +17,36 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BoardService {
-    private final BoardMapper mapper;//DI받을수 있게 - 나는 그냥 생성자 만들래
-
-    public int insBoard(BoardInsReq p){
-        return mapper.insBoard(p);
-    }
-
-    public List<BoardSelRes> selBoardList(){
-        return mapper.selBoardList();
-    }
-
-    public BoardSelOneRes selOneRes(int p){
-        return mapper.selBoardOne(p);
-    }
+    private final BoardMapper mapper;
+    //DI받을수 있게 - 나는 그냥 생성자 만들래
+    // final을 붙여서 외부에서 주입받는 생성자를 만듦
 
     /*
     public BoardService(BoardMapper mapper) {
         this.mapper = mapper;
     }
-
+빈등록이 되어있는것이 먼저 등록되고 객체화 먼저되야 함
      */
+
+    public int insBoard(BoardInsReq p) {
+        return mapper.insBoard(p);
+    }
+
+    public List<BoardSelRes> selBoardList() {
+        return mapper.selBoardList();
+    }
+
+    public BoardSelOneRes selOneRes(int p) {
+        return mapper.selBoardOne(p);
+    }
+
+    public int updBoard(BoardUpdReq p) {
+        return mapper.updBoard(p);
+    }
+
+    public int delBoard(BoardDelReq p) {
+        return mapper.delBoard(p);
+    }
 }
+
+

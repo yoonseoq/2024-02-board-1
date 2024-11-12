@@ -1,8 +1,6 @@
 package com.green.board;
 
-import com.green.board.model.BoardInsReq;
-import com.green.board.model.BoardSelOneRes;
-import com.green.board.model.BoardSelRes;
+import com.green.board.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,8 +17,11 @@ xml + interface 파일을 이용해서 implements 한  class 파일을 만들 �
 
 @Mapper
 public interface BoardMapper {
+    // 임플리먼트한것을 마이바티스 프레임워크가 만들어낸다.
     int insBoard(BoardInsReq p);
     List<BoardSelRes> selBoardList();
-
     BoardSelOneRes selBoardOne(int p);
+    int updBoard(BoardUpdReq p);
+     // 모델에서 만든것을 끌고옴 정보를 수정하는지를
+    int delBoard(BoardDelReq p);
 }

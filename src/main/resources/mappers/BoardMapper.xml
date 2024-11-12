@@ -38,4 +38,44 @@ xml은 External Markup Language 줄임말.  Markup Language 가 표시하는 언
         from board
         where board_id = #{board_id}
     </select>
+    <!-- 수정해보기 오더아이디만 받아적기 -->
+    <update id="updBoard">
+
+
+
+      UPDATE board
+        <set>
+        <if test=" title != null and title != '' ">
+            , title = #{title}
+        </if>
+        <if test=" contents != null and contents != '' ">
+            , contents = #{contents}
+        </if>
+        <if test=" writer != null and writer != '' ">
+            , writer = #{writer}
+        </if>
+
+        </set>
+
+        WHERE board_id = #{boardId}
+    </update>
+
+    <!-- 자바는 _ 부분수정 -->
+    <!-- 전체수정은
+
+     set title = {#title},
+      contents = {#contents},
+      writer = {#writer}
+      where board_id = {#boardId}
+
+      -->
+    <delete id="delBoard">
+        delete from board
+        where board_id = #{boardId}
+        and writer = #{writer}
+    </delete>
+
+
+
+
 </mapper>

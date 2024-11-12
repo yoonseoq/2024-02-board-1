@@ -1,8 +1,6 @@
 package com.green.board;
 
-import com.green.board.model.BoardInsReq;
-import com.green.board.model.BoardSelOneRes;
-import com.green.board.model.BoardSelRes;
+import com.green.board.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -130,23 +128,43 @@ import java.util.List;
 @RequestMapping("/board") // 이렇게 주소값 매핑하는게 중요
 public class BoardController {
     private final BoardService boardService;
+
+    // 빈등록만  해놓으면 객체화가 되어서 객체화가 된 주솟값을 위에코드처럼 di받을 수 있다.
+    // 타이틀 컨텐츠 라이터 만  필요, 아이디는 자동으로 값 증가하기 때문이다.
+    // 모델에 req질문 res답면 수정이 일어 났을때 독립성 보장위해 분리해서 사용
+
+
     // insert (create)
     @PostMapping// (post)/ board 요청이 오면 이 메소드가 응답담당자
     //@PostMapping("/board"):@RequestMapping("/board") 이 코드가 없으면 url을 작성해줘야한다
     //@RequestBody 는 요청이 올때 데이터가 JSON 형태로 오니까 맞춰서 데이터를 받자
-    public int insBoard(@RequestBody BoardInsReq p){
+    public int insBoard(@RequestBody BoardInsReq p) {
         System.out.println();
         System.out.println(p);
         return boardService.insBoard(p);
     }
+
+
     // 객체>JSON 바꾸는 직렬화 작업
     @GetMapping
-    public List<BoardSelRes> selBoardList(){
+    public List<BoardSelRes> selBoardList() {
         return boardService.selBoardList();
     }
+
     // 여기 적혀있는 값을 파라미터에 보내준다
     @GetMapping("{boardId}")
-    public BoardSelOneRes selOneRes(@PathVariable int boardId){
+    public BoardSelOneRes selOneRes(@PathVariable int boardId) {
         return boardService.selOneRes(boardId);
     }
+    @PutMapping
+    public int updBoard(@RequestBody BoardUpdReq p) {
+        System.out.println(p);
+        return boardService.updBoard(p);
+    }
+    @DeleteMapping
+    public int delBoard(@ModelAttribute BoardDelReq p) {
+        System.out.println(p);
+        return boardService.delBoard(p);
+    }
+
 }
